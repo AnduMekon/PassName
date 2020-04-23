@@ -30,10 +30,10 @@ padding: 0 $m-size;
 }
 @media (min-width: 45rem){
     .add-option {
-        flex-direction: row;
+        flex-direction: column;
     }
     .add-option__input {
-        margin: 0 $s-size 0 0;
+        margin: 2px;
 
     }
 

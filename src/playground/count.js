@@ -1,34 +1,44 @@
-let count = 0; 
-const addOne = () => {
-    count++;
-    renderCounterApp();
+import React from 'react';
+import ReactDOM from 'react-dom';
 
- 
-}
-const minusOne = () => {
-    count--;
-    renderCounterApp();
-}
-const reset = () => {
-    count = 0;
- renderCounterApp();
+
+const ck = {
+   
+   options: []
 }
 
-var appRoot = document.getElementById('app');
-
-const renderCounterApp = () => {
- var templateTwo = (
-     <div>
-     <h1>Count: {count}</h1>
-     <button onClick={addOne}> +1</button>
-     <button onClick={minusOne}> -1</button>
-     <button onClick={reset}> reset</button>
- 
+const OnsubmitForm = (e) => {
+    e.preventDefualt(e)
+    const option = e.target.element.option.value;
+    
+     if(option) {
+         ck.options.push(option);
+         e.target.element.option.value= '';
+        render();  
+     }
      
+
+}
+
+
+
+ const render = () => {const andy = (
+
+    <div>
+      
+        <p>{ck.options.length}</p>
+
+        <form onSubmit={OnsubmitForm}>
+            <input type="text" name= "option" />
+            
+            
+            <button>Add All</button>
+        </form>
+    </div>
+ )
+            ReactDOM.render(andy, document.getElementById('app'))
+ }
  
-     </div>
- 
- );
-ReactDOM.render(templateTwo, appRoot)
-};
-renderCounterApp();
+
+render();
+
