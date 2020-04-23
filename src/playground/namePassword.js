@@ -9,7 +9,8 @@ class HomeComponent extends React.Component {
         super(props);
         this.state = {
             name: '',
-            password: ''
+            password: '',
+            description:''
         }
       
     }
@@ -17,11 +18,22 @@ class HomeComponent extends React.Component {
        
         let itemValue = item.target.value;
         switch (type) {
-            case "name":{
-                this.setState({name: itemValue})
+            case "name":{ 
+                if(itemValue.length < 5) {
+                  item.target.style.color= 'red';
+                  this.setState({name: itemValue})  
+                }
+                else {
+                    item.target.style.color= 'black',
+                    this.setState({name: itemValue})
+                }
+                
             }
             case "password": {
                 this.setState({password:itemValue})
+            }
+            case "description": {
+                this.setState({description:itemValue})
             }
 
         }
@@ -32,8 +44,15 @@ class HomeComponent extends React.Component {
         let obj = {}
         obj.name = this.state.name;
         obj.password = this.state.password;
+        obj.description= this.state.description
         console.warn("submit", obj)
     }
+    me() {
+        let me = {}
+            me.description = this.state.description
+          console.warn('description', me)  
+        }
+    c
     render() { 
         return ( 
             <div >
@@ -47,6 +66,8 @@ class HomeComponent extends React.Component {
                         <input type="text" placeholder="description" onChange={(item) => this.valid(item, 'description')}/>
                         <br/>
                         <button onClick={() => this.submit()}>Submit</button>
+                        <button onClick={() => this.me()}>Submit</button>
+
                        
                 </div>
                 
