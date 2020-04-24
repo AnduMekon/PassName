@@ -1,71 +1,74 @@
 //https://www.youtube.com/watch?v=7Vo_VCcWupQ
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+
 
 class Form extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            userName:'',
+        this.state = { 
+            username:'',
             comments:'',
-            topics:''
-          }
+            topics: ''
+
+         }
     }
-    userNameHandler = (event) => {
+    
+    usernameHandler = (event) => {
         this.setState({
-          userName: event.target.value
+            username : event.target.value
         })
-       
     }
     commentHandler = (event) => {
         this.setState({
             comments: event.target.value
-            
         })
-        
     }
-    topicsHandlere = (event) => {
+    topicHandler = () => {
         this.setState({
             topics: event.target.value
         })
     }
-    submitForm = () => {
-        alert(`${this.state.userName} ${this.state.comments} ${this.state.topics}` )
-        
+    formHandler = () => {
+        alert(`${this.state.username} ${this.state.comments} ${this.state.topics}`)
     }
-
     render() { 
         return ( 
-            <form onSubmit={this.submitForm}>
+
+            <form onSubmit={this.formHandler}>
                 <div>
-                <label>userName</label>
-                <input type='text' value={this.state.userName} onChange={this.userNameHandler} />
+                    <label>User Name</label>
+                    <input value={this.state.username} onChange={this.usernameHandler} />
                 </div>
                 <div>
                     <label>Comments</label>
-                    <textarea type="text" value={this.state.comments} onChange={this.commentHandler}></textarea>
+                    <textarea value={this.state.comments} onChange={this.commentHandler}></textarea>
+
                 </div>
                 <div>
-                    <label>Topics</label>
-                    <select value={this.state.topics} onChange={this.topicsHandlere}>
+                    <select value={this.state.topics} onChange={this.topicHandler}> 
                         <option>React</option>
                         <option>veu</option>
                         <option>Angular</option>
                     </select>
-                    <button>Submit</button>
                 </div>
-            
+                <button>Submit</button>
             
             
             
             </form>
 
-        );
+         );
     }
 }
  
 ReactDOM.render(<Form />, document.getElementById('app'))
+
+
+
+
+
+
 
 
 
