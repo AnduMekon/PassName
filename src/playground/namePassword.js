@@ -4,6 +4,7 @@ import 'normalize.css/normalize.css';
 import '../styles/components/_emailvaldator.scss';
 
 
+
 class HomeComponent extends React.Component {
     constructor(props) {
         super(props);

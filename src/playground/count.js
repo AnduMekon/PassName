@@ -3,17 +3,22 @@ import ReactDOM from 'react-dom';
 
 
 
+const submitForm = () => {
+
+}
+
 const andy = (
 
 
     <div>
-        <form>
+        <form onClick={submitForm}>
             <input type='text' placeholder='task' name='option' />
             <br/>
             <br/>
             <input type='text' placeholder='description' name='description' />
             <br/>
             <br/>
+            
             <input type='text' placeholder='priority' name='priority' />
             <br/>
             <br/>
