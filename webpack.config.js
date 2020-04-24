@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/playground/onepageIndecision.js',
+  entry: './src/playground/count.js',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
