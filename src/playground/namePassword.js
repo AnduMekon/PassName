@@ -67,7 +67,7 @@ class HomeComponent extends React.Component {
                         <input type="text" placeholder="description" onChange={(item) => this.valid(item, 'description')}/>
                         <br/>
                         <button onClick={() => this.submit()}>Submit</button>
-                        <button onClick={() => this.me()}>Submit</button>
+                        
 
                        
                 </div>

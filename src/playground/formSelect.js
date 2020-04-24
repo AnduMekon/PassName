@@ -7,24 +7,53 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName:''
+            userName:'',
+            comments:'',
+            topics:''
           }
     }
-    userNameHandler (event) {
-        this.state({
+    userNameHandler = (event) => {
+        this.setState({
           userName: event.target.value
         })
-        console.warn(event)
+       
+    }
+    commentHandler = (event) => {
+        this.setState({
+            comments: event.target.value
+            
+        })
+        
+    }
+    topicsHandlere = (event) => {
+        this.setState({
+            topics: event.target.value
+        })
+    }
+    submitForm = () => {
+        alert(`${this.state.userName} ${this.state.comments} ${this.state.topics}` )
+        
     }
 
     render() { 
         return ( 
-            <form>
+            <form onSubmit={this.submitForm}>
                 <div>
                 <label>userName</label>
                 <input type='text' value={this.state.userName} onChange={this.userNameHandler} />
                 </div>
                 <div>
+                    <label>Comments</label>
+                    <textarea type="text" value={this.state.comments} onChange={this.commentHandler}></textarea>
+                </div>
+                <div>
+                    <label>Topics</label>
+                    <select value={this.state.topics} onChange={this.topicsHandlere}>
+                        <option>React</option>
+                        <option>veu</option>
+                        <option>Angular</option>
+                    </select>
+                    <button>Submit</button>
                 </div>
             
             
