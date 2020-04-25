@@ -5,7 +5,7 @@ class VisiblityToggle  extends React.Component {
     constructor(props) {
         super(props);
         this.visiblityHandler = this.visiblityHandler.bind(this);
-        const options = ['one','two','three'];
+        
         this.state = { 
             visiblity: false, 
             
@@ -39,7 +39,7 @@ class VisiblityToggle  extends React.Component {
                     </div>
                 )}
             
-            { options.map((option) => <p key={option}>{option}</p>)}
+            {options.map((option) => <p key={option}>{option}</p>)}
             
             </div>
 
