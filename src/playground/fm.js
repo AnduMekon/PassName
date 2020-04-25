@@ -79,6 +79,7 @@ class Header extends React.Component {
         return (
 
            <div>
+           
                {this.props.description.map((ds) => <DeOption key={ds} dsText={ds}/>)}
            </div>
         )
