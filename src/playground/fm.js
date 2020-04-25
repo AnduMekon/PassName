@@ -38,20 +38,26 @@ class Header extends React.Component {
     }
 }
  class Action extends React.Component {
-    
+    handlePick() {
+        alert('handlePick')
+    }
      render() { 
          return ( 
              <div>
-                <button>what shall i do</button>
+                <button onClick={this.handlePick}>what shall i do</button>
              </div>
           );
      }
  }
   
  class Options extends React.Component {
+     removeAll() {
+         alert('remove All')
+     }
      render() {
          return (
              <div>
+             <button onClick={this.removeAll}>RemoveAll</button>
              {this.props.options.map((option)=> <Option key={option} optionText={option}/>)}
              
              </div>
