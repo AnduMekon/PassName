@@ -1,7 +1,112 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-console.log('app.js is running');
 
+class IndecisionApp extends React.Component {
+  
+
+    render() { 
+        
+        const title = 'Indecision ';
+        const subtitle= 'get your life in the a computer '
+        const options = ['one', 'two', 'three']
+        return ( 
+
+            <div>
+                <Header title={title} subtitle={subtitle}/>
+                <Action  />
+                <Options options={options}/>
+                <AddOption />
+            
+            
+            
+            </div>
+
+
+         );
+    }
+}
+ 
+class Header extends React.Component {
+    
+    render() { 
+        return (  
+            <div>
+                <h1>{this.props.title}</h1>
+                
+            </div>
+        );
+    }
+}
+ 
+class Action extends React.Component {
+    
+    render() { 
+        return (  
+            <div>
+                <button>what shall you do?</button>
+            </div>
+        );
+    }
+}
+class Options extends React.Component {
+    
+    render() { 
+        return (  
+            <div>
+                {this.props.options.map((option) => <Option key={option} optionText={option}/>)}
+            </div>
+        );
+    }
+}
+class Option extends React.Component {
+    render() {
+        return (
+            <div>
+                {this.props.optionText}
+            </div>
+        )
+    }
+}
+
+class AddOption extends React.Component {
+    
+    render() { 
+        return (  
+            <div>
+                <p>this add option</p>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 class IndecisionApp extends React.Component {
     
     
@@ -116,11 +221,22 @@ class PrOption extends React.Component {
     }
 }
  class AddOption extends React.Component {
+    handleAddOption(e) {
+        e.preventDefault();
+        const option = e.target.elements.option.value.trim()
+        if(option) {
+            alert(option)
+
+        }
+    }
      render() {
          return (
 
             <div>
-                <p>add option</p>
+               <form onSubmit={this.handleAddOption}>
+                    <input type='text' name= 'option' />
+                    <button>Add</button>
+               </form>
             </div>
          )
      }
@@ -135,7 +251,7 @@ class PrOption extends React.Component {
 
 
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));*/
 
 
 
