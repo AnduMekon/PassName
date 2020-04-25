@@ -9,8 +9,8 @@ class IndecisionApp extends React.Component {
         const title = 'Indecision App'
         const subtitle = 'Put your life on the hands of a computer'
         const options = ['one','two','three']
-        const description = []
-        const priority = []
+        const description = ['description1','description2', 'description3']
+        const priority = ['priority1','priority2','priority3']
 
         return (
             <div>
@@ -52,18 +52,38 @@ class Header extends React.Component {
      render() {
          return (
              <div>
-             <p>{this.props.options.map((option)=> <p key={option}>{option}</p>)}</p>
+             {this.props.options.map((option)=> <Option key={option} optionText={option}/>)}
              
              </div>
          )
      }
  }
+ class Option extends React.Component {
+    render() {
+        return (
+
+           <div>
+              option:{this.props.optionText}
+           </div>
+        )
+    }
+}
    class Description extends React.Component {
     render() {
         return (
 
            <div>
-               <p>{this.props.description.length}</p>
+               {this.props.description.map((ds) => <DeOption key={ds} dsText={ds}/>)}
+           </div>
+        )
+    }
+}
+class DeOption extends React.Component {
+    render() {
+        return (
+
+           <div>
+              {this.props.dsText}
            </div>
         )
     }
@@ -73,12 +93,21 @@ class Priority extends React.Component {
         return (
 
            <div>
-               <p>{this.props.priority.length}</p>
+               {this.props.priority.map((pr) => <PrOption key={pr} prText={pr}/>)}
            </div>
         )
     }
 }
- 
+class PrOption extends React.Component {
+    render() {
+        return (
+
+           <div>
+              {this.props.prText}
+           </div>
+        )
+    }
+}
  class AddOption extends React.Component {
      render() {
          return (
