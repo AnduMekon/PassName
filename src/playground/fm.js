@@ -5,6 +5,7 @@ class Indecision extends React.Component{
     constructor(props) {
         super(props);
         this.handleDeleteAll = this.handleDeleteAll.bind(this)
+        this.handleBack = this.handleBack.bind(this)
         this.state = {
             options : ['one','two','three'],
             discription: ['it is my discription','it is our disc'],
@@ -27,6 +28,7 @@ handlePick() {
     alert('test')
 }
 
+
     render() {
             const title = 'Indecision';
             const subtitle = 'Put your life in the hand of a computer!';
@@ -35,11 +37,13 @@ handlePick() {
             <div>
                 <Header title= {title} subtitle = {subtitle}/>
                 <Action  hasOptions= {this.state.options.length > 0}
+                        handlePick={this.handlePick}
                
                 />
                 <Options options= {this.state.options} handleDeleteAll= {this.handleDeleteAll}
                     discription= {this.state.discription}
                     priority = {this.state.priority}
+                    
                 />
                 <AddOption   />
             
@@ -66,7 +70,8 @@ handlePick() {
     render() {
         return (
             <div>
-                <button disabled ={!this.props.hasOptions}
+                <button onClick={this.props.handlePick}
+                disabled ={!this.props.hasOptions}
                
                 
                 >what shall I do?</button>
@@ -83,6 +88,7 @@ handlePick() {
         return (
             <div>
                 <button onClick={this.props.handleDeleteAll}>Remove All</button>
+                <button onClick={this.props.handleBack}>Bring it back</button>
                 <h3>your option</h3>
                
                {this.props.options.map((option) => <Option  key={option} optionText={option}/>)}
