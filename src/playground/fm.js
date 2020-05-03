@@ -1,9 +1,121 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+
+class Indecision extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleDeleteAll = this.handleDeleteAll.bind(this)
+        this.state = {
+            options : ['one','two','three'],
+            discription: ['it is my discription','it is our disc'],
+            priority : ['low', 'medium', 'high']
+        }
+    }
+        
+
+handleDeleteAll() {
+    this.setState(() => {
+        return {
+            options : [],
+            discription:[],
+            priority:[]
+        }
+    })
+
+}
+
+    render() {
+            const title = 'Indecision';
+            const subtitle = 'Put your life in the hand of a computer!';
+          
+        return (
+            <div>
+                <Header title= {title} subtitle = {subtitle}/>
+                <Action  hasOption={this.state.options.length > 0}/>
+                <Options options= {this.state.options} handleDeleteAll= {this.handleDeleteAll}
+                    discription= {this.state.discription}
+                    priority = {this.state.priority}
+                />
+                <AddOption   />
+            
+            
+            </div>
+        )
+    }
+}
+ class Header extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <h1> {this.props.title}  </h1>
+                <h2>{this.props.subtitle}</h2>
+            </div>
+        )
+    }
+ }
+
+
+ class Action extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <button disabled ={!this.props.hasOptions}>what shall I do?</button>
+            </div>
+        )
+    }
+ }
 
 
 
+ class Options extends React.Component {
 
+    render() {
+        return (
+            <div>
+                <button onClick={this.props.handleDeleteAll}>Remove All</button>
+                <h3>your option</h3>
+               
+               {this.props.options.map((option) => <Option  key={option} optionText={option}/>)}
+                <h3>your Description</h3>
+               {this.props.discription.map((dis) => <p key={dis}>{dis}</p>)}
+                <h3>your Priority</h3>
+               {this.props.priority.map((pri) => <p key={pri}>{pri}</p>)}
+            </div>
+        )
+    }
+ }
+
+
+ class Option extends React.Component {
+
+    render() {
+        return (
+            <div>
+               {this.props.optionText}
+            </div>
+        )
+    }
+ }
+
+ class AddOption extends React.Component {
+
+    render() {
+        return (
+            <div>
+               <form>
+                <input type="text" name="option" />
+                <button>Add Option</button>
+               </form>
+            </div>
+        )
+    }
+ }
+
+
+
+ReactDOM.render(<Indecision />, document.getElementById('app'))
 
 
 
