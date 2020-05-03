@@ -5,9 +5,9 @@ class Indecision extends React.Component{
     constructor(props) {
         super(props);
         this.handleDeleteAll = this.handleDeleteAll.bind(this)
-        this.handleBack = this.handleBack.bind(this)
+        
         this.state = {
-            options : ['one','two','three'],
+            options : ['one', 'two', 'three'],
             discription: ['it is my discription','it is our disc'],
             priority : ['low', 'medium', 'high']
         }
@@ -89,12 +89,12 @@ handlePick() {
             <div>
                 <button onClick={this.props.handleDeleteAll}>Remove All</button>
                 <button onClick={this.props.handleBack}>Bring it back</button>
-                <h3>your option</h3>
-               
+                <h3>{this.props.options.length > 0 ? 'Here are your Option' : 'no option'}</h3>
+            
                {this.props.options.map((option) => <Option  key={option} optionText={option}/>)}
-                <h3>your Description</h3>
+                <h3>{this.props.discription.length > 0 ? 'Here are your Discriptions' : 'No Discription'}</h3>
                {this.props.discription.map((dis) => <p key={dis}>{dis}</p>)}
-                <h3>your Priority</h3>
+                <h3>{this.props.priority.length > 0 ? 'Here are your Priorities' : 'No Priority'}</h3>
                {this.props.priority.map((pri) => <p key={pri}>{pri}</p>)}
             </div>
         )
