@@ -23,6 +23,9 @@ handleDeleteAll() {
     })
 
 }
+handlePick() {
+    alert('test')
+}
 
     render() {
             const title = 'Indecision';
@@ -31,7 +34,9 @@ handleDeleteAll() {
         return (
             <div>
                 <Header title= {title} subtitle = {subtitle}/>
-                <Action  hasOption={this.state.options.length > 0}/>
+                <Action  hasOptions= {this.state.options.length > 0}
+               
+                />
                 <Options options= {this.state.options} handleDeleteAll= {this.handleDeleteAll}
                     discription= {this.state.discription}
                     priority = {this.state.priority}
@@ -61,7 +66,10 @@ handleDeleteAll() {
     render() {
         return (
             <div>
-                <button disabled ={!this.props.hasOptions}>what shall I do?</button>
+                <button disabled ={!this.props.hasOptions}
+               
+                
+                >what shall I do?</button>
             </div>
         )
     }
