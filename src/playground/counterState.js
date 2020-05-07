@@ -3,6 +3,63 @@ import ReactDOM from 'react-dom';
 
 class Counter extends React.Component{
     constructor(props) {
+        super(props); 
+        this.handleAdd = this.handleAdd.bind(this)
+        this.handleMins = this.handleMins.bind(this)
+        this.hanldeReset = this.hanldeReset.bind(this)
+        this.state = {
+            count:0
+        }
+    }
+
+handleAdd() {
+    this.setState((prevState) => {
+        return {
+            count: prevState.count + 1
+        }
+    })
+}
+
+handleMins() {
+    this.setState((prevState) => {
+        return {
+            count: prevState.count -1
+        }
+    })
+}
+
+
+hanldeReset() {
+    this.setState(() => {
+        return {
+            count: 0
+        }
+    })
+}
+    render() {
+        return(
+            <div>
+            <h1>Count:{this.state.count}</h1>
+            <button onClick={this.handleAdd}>+</button>
+            <button onClick={this.handleMins}>-</button>
+            <button onClick={this.hanldeReset}>Reset</button>
+            
+            
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<Counter />, document.getElementById('app'))
+
+
+
+
+
+
+
+/*class Counter extends React.Component{
+    constructor(props) {
         super(props);
         this.addHandler = this.addHandler.bind(this);
         this.minsHandler = this.minsHandler.bind(this);
@@ -48,4 +105,4 @@ resetHandler() {
         )
     }
 }
-ReactDOM.render(<Counter />, document.getElementById('app'))
+ReactDOM.render(<Counter />, document.getElementById('app'))*/
