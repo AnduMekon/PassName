@@ -91,27 +91,35 @@ class Action extends React.Component {
 
     }
 }
-class Options extends React.Component {
-    render() {
+const Options = (props)  => {
+    
         return (
             <div>
-            <button onClick={this.props.handleDeleteAll}>Remove All</button>
-            {this.props.options.map((option) => <Option 
+            <button onClick={props.handleDeleteAll}>Remove All</button>
+            {props.options.map((option) => (<Option 
                 key={option} optionText={option}
                 handleDeleteOption={this.props.handleDeleteOption}
-                />)}
+                />))
+                }
             
             </div>
-        )
+        );
 
     }
-}
+
 class Option extends React.Component {
     render() {
         return (
             <div>
             {this.props.optionText}
-            <button onClick={this.props.handleDeleteOption}>remove</button>
+            <button onClick={(e) => {
+                props.handleDeleteOption(props.optionText)
+
+            } }
+            
+            
+            >Remove
+            </button>
             </div>
         )
 
