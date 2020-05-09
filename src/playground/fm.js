@@ -226,7 +226,13 @@ handlePick() {
                         handleDeleteAll={this.handleDeleteAll}
                       
                />
-               <AddOptions handleSubmit={this.handleSubmit}/>
+               <AddOptions handleSubmit={this.handleSubmit}
+                            options={this.state.options}
+                            description={this.state.description}
+                            priority = {this.state.priority} 
+
+               
+               />
                 
               
                
@@ -310,19 +316,12 @@ class AddOptions extends React.Component {
     }
 handleSubmit(e) {
     e.preventDefault();
-    const option = e.target.elements.option.value.trim()
-    const desc = e.target.elements.desc.value.trim()
-    const prio = e.target.elements.prio.value.trim()
- if (option) {
-     return this.props.handleSubmit(option)
-            
- }
- if (desc) {
-     return this.props.handleSubmit(desc)
- }
- if(prio) {
-     return this.props.handleSubmit(prio)
- }
+    const option = e.target.value.trim()
+    const desc = e.target.value.trim()
+    const prio = e.target.value.trim()
+console.log(option)
+console.log(desc)
+console.log(prio)
 
 }
     render() { 
@@ -331,11 +330,11 @@ handleSubmit(e) {
             
             <form onSubmit={this.handleSubmit}>
                     <h3>Add Options</h3>
-                    <input type="test" name="option" />
+                    <input type="test" name="option" value={this.props.options} onSubmit={this.handleSubmit}/>
                     <h3>Add Description</h3>
-                    <input type="test" name="desc" />
+                    <input type="test" name="desc" value={this.props.description} onSubmit={this.handleSubmit} />
                     <h3>Add priority</h3>
-                    <input type="test" name="prio" />
+                    <input type="test" name="prio" value={this.props.priority} onSubmit={this.handleSubmit} />
                     
                     <button>Submit</button>
             </form>

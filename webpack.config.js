@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/playground/fm.js',
+  entry: './src/playground/onChangehandler.js',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
