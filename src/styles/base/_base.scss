@@ -6,7 +6,7 @@ html {
 
 body {
    
-    background: $dark-blue;
+    background: greenyellow;
     font-family: Helvetica, Arial, sans-serif ;
     font-size: 1.6rem;
 
@@ -20,4 +20,22 @@ button {
 button:disabled {
 
     cursor: default
+}
+.imge {
+    height: 600px;
+    width: 600px;
+    padding-left: 300px;
+
+}
+.action-btn {
+    padding-left: 500px;
+    
+}
+.options {
+    align-items: center;
+}
+.stu {
+    color: red;
+    padding-left: 300px;
+   
 }

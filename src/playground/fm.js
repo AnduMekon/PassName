@@ -1,5 +1,171 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css/normalize.css';
+import '../styles/styles.scss';
+
+
+/*class Indecision extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleAddOptions = this.handleAddOptions.bind(this)
+        this.handleDeleteAll = this.handleDeleteAll.bind(this)
+       this.state = { 
+        options:['one', 'two']
+     }
+    }
+    handleAddOptions(option) {
+        if(!option) {
+            return 'Enter valid value to Add item'
+        } else if(this.state.options.indexOf(option) > -1) {
+            return 'This Option already exists'
+        }
+        this.setState((prevState) => {
+            return{
+                options: prevState.options.concat(option)
+            }
+
+        })
+
+    }
+    handleDeleteAll() {
+        this.setState(() => {
+            return {
+                options: []
+            }
+        })
+    }
+    render() { 
+        const title= 'Indecision';
+        const subtitle = 'Put your life in the computer hand!'
+      
+        return ( 
+         
+            <div>
+                <Header  title={title} subtitle={subtitle}/>
+                <Action />
+                <Options options={this.state.options}
+                         handleDeleteAll={this.handleDeleteAll}
+                />
+                <AddOptions handleAddOptions={this.handleAddOptions}/>
+                <Template />
+            
+            </div>
+        );
+    }
+}
+
+class Header extends React.Component {
+    render() {
+        return(
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
+            
+            </div>
+        )
+    }
+}
+class Action extends React.Component {
+    render() {
+        return(
+            <div className="action-btn">
+                <button>What shall I do?</button>
+            </div>
+        )
+    }
+}
+class Options extends React.Component {
+    render() {
+        return(
+            
+            <div className="options">
+                <button onClick={this.props.handleDeleteAll}>Remove All</button>
+               {this.props.options.map((option) => <Option key={option} optionText={option}/>)} 
+            
+            </div>
+        )
+    }
+}
+const Option = (props) => {
+    return (
+        <div>
+        {props.optionText}
+       
+        
+        </div>
+
+    )
+}
+class AddOptions extends React.Component {
+    constructor(props) {
+        super(props) 
+        this.handleAddOptions = this.handleAddOptions.bind(this)
+        this.state = {
+            error: undefined
+        }
+    }
+    handleAddOptions(e) {
+        e.preventDefault();
+    const option= e.target.elements.option.value.trim();
+    const error = this.props.handleAddOptions(option)
+    this.setState(() => {
+        return {
+            error
+        }
+    })
+
+    }
+    render() {
+        return (
+            <div>
+               
+                 {this.state.error && 
+                    <div className="stu">{this.state.error} </div>}
+                    
+              
+           
+                 
+                
+                <form onSubmit={this.handleAddOptions}>
+                    <input type="text" name="option"/>
+                    <button>Add Option</button>
+                
+                </form>
+            
+            </div>
+        )
+
+    }
+}
+class Template extends React.Component {
+    render() {
+        return(
+            <div>
+              
+               <img className="imge" src="image/pi1.jpg" alt="" />
+               <h1>Template</h1>
+               
+            
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<Indecision  />, document.getElementById('app')) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Indecision extends React.Component {
@@ -26,11 +192,16 @@ class Indecision extends React.Component {
     })
  }
         
-    handleSubmit(e) { 
+    handleSubmit(option, desc, prio) { 
         e.preventDefault();
-        const option = e.target.elements.option.value.trim()
-        const desc = e.target.elements.desc.value.trim()
-        const prio = e.target.elements.prio.value.trim()
+        if(!option) {
+            return 'Enter valid value of option'
+        } else if(!desc) {
+            return 'Enter valid value of description'
+        } else if(!prio) {
+            return 'Enter valid value of priority'
+        }
+        
         this.setState((prevState) => {
             return {
                 options: prevState.options.concat(option),
@@ -47,23 +218,17 @@ handlePick() {
     render() {
         return (
             <div> 
-                <form onSubmit={this.handleSubmit}>
-                    <h3>Add Options</h3>
-                    <input type="test" name="option" />
-                    <h3>Add Description</h3>
-                    <input type="test" name="desc" />
-                    <h3>Add priority</h3>
-                    <input type="test" name="prio" />
-                    
-                    <button>Submit</button>
-                </form>
                 <Action handlePick={this.handlePick}/>
-               <Options options={this.state.options}
+
+                 <Options options={this.state.options}
                         description={this.state.description}
                         priority = {this.state.priority}
                         handleDeleteAll={this.handleDeleteAll}
                       
                />
+               <AddOptions handleSubmit={this.handleSubmit}/>
+                
+              
                
               
             </div>
@@ -85,35 +250,97 @@ class Options extends React.Component {
     render() {
 
     return (
-        <div>
+        <div className="options">
             <button onClick={this.props.handleDeleteAll}>Remove All</button>
              <h1>Options</h1>
-            <h3>{this.props.options.map((option) => <OptDesPrioDelete key={option} optionText={option}/>)}</h3>
+            <h3>{this.props.options.map((option) =>  <Option key={option} optionText={option}/>)}</h3>
             <h1>Description</h1>
-            <h3>{this.props.description.map((desc) => <OptDesPrioDelete key={desc} descText={desc}/>)}</h3>
+            <h3>{this.props.description.map((desc) => <Description key={desc} descText={desc}/>)}</h3>
             <h1>Priority</h1>
-            <h3>{this.props.priority.map((prio) => <OptDesPrioDelete key={prio} prioText={prio}/>)}</h3>
-
+            <h3>{this.props.priority.map((prio) => <Priority key={prio} prioText={prio}/>)}</h3>
            
-          
+           
         </div>
     )
 
 
 }
 }
-class OptDesPrioDelete extends React.Component {
+class Option extends React.Component {
 
     render() { 
         return (
-        <div>
+        <div >
+            
+          {this.props.optionText}
+      
+          
+        </div>
+        )}
+}
+class Description extends React.Component {
+
+    render() { 
+        return (
+        <div >
+            
+          {this.props.descText}
+      
+          
+        </div>
+        )}
+}
+class Priority extends React.Component {
+
+    render() { 
+        return (
+        <div >
+            
+          {this.props.prioText}
+      
+          
+        </div>
+        )}
+}
+class AddOptions extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this)
        
-            {this.props.optionText}
+    }
+handleSubmit(e) {
+    e.preventDefault();
+    const option = e.target.elements.option.value.trim()
+    const desc = e.target.elements.desc.value.trim()
+    const prio = e.target.elements.prio.value.trim()
+ if (option) {
+     return this.props.handleSubmit(option)
+            
+ }
+ if (desc) {
+     return this.props.handleSubmit(desc)
+ }
+ if(prio) {
+     return this.props.handleSubmit(prio)
+ }
+
+}
+    render() { 
+        return (
+        <div >
+            
+            <form onSubmit={this.handleSubmit}>
+                    <h3>Add Options</h3>
+                    <input type="test" name="option" />
+                    <h3>Add Description</h3>
+                    <input type="test" name="desc" />
+                    <h3>Add priority</h3>
+                    <input type="test" name="prio" />
+                    
+                    <button>Submit</button>
+            </form>
       
-            {this.props.descText}
-      
-            {this.props.prioText}
-            <button>Edit</button>
+          
         </div>
         )}
 }
