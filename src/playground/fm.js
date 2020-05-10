@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'normalize.css/normalize.css';
-import '../styles/styles.scss';
+
+
+
 
 
 /*class Indecision extends React.Component {
@@ -168,7 +169,7 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
 
 
 
-class Indecision extends React.Component {
+/*class Indecision extends React.Component {
     constructor(props) {
         super(props); 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -345,8 +346,8 @@ console.log(prio)
 }
 
 
-ReactDOM.render(<Indecision />, document.getElementById('app'))
-/*class Indecision extends React.Component{
+ReactDOM.render(<Indecision />, document.getElementById('app'))*/
+class Indecision extends React.Component{
     constructor(props) {
         super(props); 
         this.handlePick = this.handlePick.bind(this)
@@ -515,7 +516,7 @@ class AddOptions extends React.Component {
 
     }
 }
-ReactDOM.render(<Indecision />, document.getElementById('app')) */
+ReactDOM.render(<Indecision />, document.getElementById('app')) 
 
 
 
