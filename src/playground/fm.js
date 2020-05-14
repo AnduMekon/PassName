@@ -175,11 +175,14 @@ class Indecision extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleDeleteAll = this.handleDeleteAll.bind(this)
         this.handlePick = this.handlePick.bind(this)
+        this.handleDeleteAction = this.handleDeleteAction(this)
        
         this.state = {
             options : ['andu'],
             description: ['meko'],
-            priority: ['yaya']
+            priority: ['yaya'],
+            pickedAction:['one','two', 'three']
+            
         }
     
     }
@@ -208,15 +211,27 @@ class Indecision extends React.Component {
 handlePick() {
 
 const randomNum = Math.floor(Math.random() * this.state.options.length) 
-console.log(randomNum)  
+  
 const option = this.state.options[randomNum]
 const desc = this.state.description[randomNum]
 const prio = this.state.priority[randomNum]
  
+this.setState((prevState) => {
+    return {
+        pickedAction: prevState.pickedAction.concat(option, desc, prio)
+    }
+})
 
 
-return(option + " " + desc + " " + prio)
 
+}
+handleDeleteAction(){
+    this.setState(() => {
+        return {
+            pickedAction: []
+        }
+    }
+    )
 }
 
     render() {
@@ -234,7 +249,9 @@ return(option + " " + desc + " " + prio)
                />
                <AddOptions handleSubmit={this.handleSubmit}/>
                 
-               <h1>{this.handlePick()}</h1>
+              <ResultAction pickedAction={this.state.pickedAction}
+                           handleDeleteAction={this.handleDeleteAction}
+              />
              
                 
               
@@ -252,6 +269,17 @@ class Action extends React.Component {
                 <button onClick={this.props.handlePick}
                         disabled={!this.props.hasOption}
                 >What shall i do now ?</button>
+            </div>
+        )
+    }
+}
+class ResultAction extends React.Component {
+    render() {
+        return(
+            <div>
+            <h2>Your Current Option, description and priority is </h2>
+            {this.props.pickedAction.map((action) => <p key ={action}> {action}</p>)}
+            <button onClick={this.handleDeleteAction}>Done</button>
             </div>
         )
     }
