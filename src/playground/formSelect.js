@@ -24,17 +24,25 @@ class Form extends React.Component {
             comments: event.target.value
         })
     }
-    topicHandler = () => {
+    topicHandler = (event) => {
         this.setState({
             topics: event.target.value
         })
     }
     formHandler = () => {
         alert(`${this.state.username} ${this.state.comments} ${this.state.topics}`)
+      this.setState((prevState)=> {
+          return {
+              username: prevState.username,
+              comments: prevState.comments,
+              topics: prevState.topics
+          }
+      })
     }
     render() { 
         return ( 
-
+            <div>
+            
             <form onSubmit={this.formHandler}>
                 <div>
                     <label>User Name</label>
@@ -57,6 +65,15 @@ class Form extends React.Component {
             
             
             </form>
+            <h2>UserName</h2>
+            <p>{this.state.username}</p>
+            <h2>Comments</h2>
+            <p>{this.state.comments}</p>
+            <h2>Topics</h2>
+            <p>{this.state.topics}</p>
+            {this.formHandler}
+            </div>
+
 
          );
     }

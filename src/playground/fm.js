@@ -158,6 +158,7 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
 
 
 
+//________________________________________________________________________
 
 
 
@@ -168,8 +169,7 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
 
 
 
-
-/*class Indecision extends React.Component {
+class Indecision extends React.Component {
     constructor(props) {
         super(props); 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -177,9 +177,9 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
         this.handlePick = this.handlePick.bind(this)
        
         this.state = {
-            options : [],
-            description: [],
-            priority: []
+            options : ['andu'],
+            description: ['meko'],
+            priority: ['yaya']
         }
     
     }
@@ -193,33 +193,38 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
     })
  }
         
-    handleSubmit(option, desc, prio) { 
-        e.preventDefault();
-        if(!option) {
-            return 'Enter valid value of option'
-        } else if(!desc) {
-            return 'Enter valid value of description'
-        } else if(!prio) {
-            return 'Enter valid value of priority'
-        }
-        
+    handleSubmit(option,desc, prio) { 
+          console.log("this are my option", option)
+          console.log("this are my desc",desc) 
+          console.log("this are my prio", prio)  
         this.setState((prevState) => {
             return {
                 options: prevState.options.concat(option),
                 description: prevState.description.concat(desc),
-                priority : prevState.priority.concat(prio)
+                priority: prevState.priority.concat(prio)
             }
         })
     }
 handlePick() {
-    alert('it is working')
+
+const randomNum = Math.floor(Math.random() * this.state.options.length) 
+console.log(randomNum)  
+const option = this.state.options[randomNum]
+const desc = this.state.description[randomNum]
+const prio = this.state.priority[randomNum]
+ 
+
+
+return(option + " " + desc + " " + prio)
 
 }
 
     render() {
         return (
             <div> 
-                <Action handlePick={this.handlePick}/>
+                <Action handlePick={this.handlePick}
+                        hasOption={this.state.options.length > 0}        
+                />
 
                  <Options options={this.state.options}
                         description={this.state.description}
@@ -227,13 +232,10 @@ handlePick() {
                         handleDeleteAll={this.handleDeleteAll}
                       
                />
-               <AddOptions handleSubmit={this.handleSubmit}
-                            options={this.state.options}
-                            description={this.state.description}
-                            priority = {this.state.priority} 
-
-               
-               />
+               <AddOptions handleSubmit={this.handleSubmit}/>
+                
+               <h1>{this.handlePick()}</h1>
+             
                 
               
                
@@ -247,7 +249,9 @@ class Action extends React.Component {
     render() {
         return(
             <div>
-                <button onClick={this.props.handlePick}>What shall i do now ?</button>
+                <button onClick={this.props.handlePick}
+                        disabled={!this.props.hasOption}
+                >What shall i do now ?</button>
             </div>
         )
     }
@@ -260,11 +264,11 @@ class Options extends React.Component {
         <div className="options">
             <button onClick={this.props.handleDeleteAll}>Remove All</button>
              <h1>Options</h1>
-            <h3>{this.props.options.map((option) =>  <Option key={option} optionText={option}/>)}</h3>
+            <h3>{this.props.options.map((option, idx) =>  <OptionAll key={idx} optionText={option}/>)}</h3>
             <h1>Description</h1>
-            <h3>{this.props.description.map((desc) => <Description key={desc} descText={desc}/>)}</h3>
+            <h3>{this.props.description.map((desc, idx) => <OptionAll key={idx} descText={desc}/>)}</h3>
             <h1>Priority</h1>
-            <h3>{this.props.priority.map((prio) => <Priority key={prio} prioText={prio}/>)}</h3>
+            <h3>{this.props.priority.map((prio, idx) => <OptionAll key={idx} prioText={prio}/>)}</h3>
            
            
         </div>
@@ -273,81 +277,66 @@ class Options extends React.Component {
 
 }
 }
-class Option extends React.Component {
+class OptionAll extends React.Component {
 
     render() { 
         return (
         <div >
             
           {this.props.optionText}
-      
-          
-        </div>
-        )}
-}
-class Description extends React.Component {
-
-    render() { 
-        return (
-        <div >
-            
-          {this.props.descText}
-      
-          
-        </div>
-        )}
-}
-class Priority extends React.Component {
-
-    render() { 
-        return (
-        <div >
-            
+            {this.props.descText}
           {this.props.prioText}
-      
-          
         </div>
         )}
 }
+
+
+
 class AddOptions extends React.Component {
     constructor(props) {
-        super(props);
+        super(props) 
         this.handleSubmit = this.handleSubmit.bind(this)
        
     }
-handleSubmit(e) {
-    e.preventDefault();
-    const option = e.target.value.trim()
-    const desc = e.target.value.trim()
-    const prio = e.target.value.trim()
-console.log(option)
-console.log(desc)
-console.log(prio)
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log('handle submit hit')
+    const option= e.target.elements.option.value.trim();
+    const desc= e.target.elements.desc.value.trim();
+    const prio= e.target.elements.prio.value.trim();
 
-}
-    render() { 
+    this.props.handleSubmit(option, desc, prio)
+    
+    
+
+
+    }
+    render() {
         return (
-        <div >
-            
-            <form onSubmit={this.handleSubmit}>
-                    <h3>Add Options</h3>
-                    <input type="test" name="option" value={this.props.options} onSubmit={this.handleSubmit}/>
-                    <h3>Add Description</h3>
-                    <input type="test" name="desc" value={this.props.description} onSubmit={this.handleSubmit} />
-                    <h3>Add priority</h3>
-                    <input type="test" name="prio" value={this.props.priority} onSubmit={this.handleSubmit} />
-                    
+            <div>
+               
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" name="option"/>
+                    <input type="text" name="desc"/>
+                    <input type="text" name="prio"/>
                     <button>Submit</button>
-            </form>
-      
-          
-        </div>
-        )}
+                </form>
+            
+            </div>
+        )
+
+    }
 }
 
 
-ReactDOM.render(<Indecision />, document.getElementById('app'))*/
-class Indecision extends React.Component{
+ReactDOM.render(<Indecision />, document.getElementById('app'))
+
+
+
+
+
+//__________________________________________________________________________
+/*class Indecision extends React.Component{
     constructor(props) {
         super(props); 
         this.handlePick = this.handlePick.bind(this)
@@ -384,13 +373,13 @@ handlePick() {
     alert(option)
 }
 handleDeleteOption(optionToRemove) {
-    this.setState((prevState) => ({
-        options: prevState.options.filter((option) => {
-            return optionToRemove !== option
-        })
-    }
-
-    ))
+    this.setState((prevState) => {
+        return {
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option
+            })
+        }
+    })
 }
 
     render() {
@@ -516,7 +505,7 @@ class AddOptions extends React.Component {
 
     }
 }
-ReactDOM.render(<Indecision />, document.getElementById('app')) 
+ReactDOM.render(<Indecision />, document.getElementById('app')) */
 
 
 
