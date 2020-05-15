@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 
 
-/*class Indecision extends React.Component {
+class Indecision extends React.Component {
     constructor(props) {
         super(props);
         this.handleAddOptions = this.handleAddOptions.bind(this)
@@ -48,7 +48,7 @@ import ReactDOM from 'react-dom';
                          handleDeleteAll={this.handleDeleteAll}
                 />
                 <AddOptions handleAddOptions={this.handleAddOptions}/>
-                <Template />
+              
             
             </div>
         );
@@ -138,21 +138,9 @@ class AddOptions extends React.Component {
 
     }
 }
-class Template extends React.Component {
-    render() {
-        return(
-            <div>
-              
-               <img className="imge" src="image/pi1.jpg" alt="" />
-               <h1>Template</h1>
-               
-            
-            </div>
-        )
-    }
-}
 
-ReactDOM.render(<Indecision  />, document.getElementById('app')) */
+
+ReactDOM.render(<Indecision  />, document.getElementById('app')) 
 
 
 
@@ -169,7 +157,7 @@ ReactDOM.render(<Indecision  />, document.getElementById('app')) */
 
 
 
-class Indecision extends React.Component {
+/*class Indecision extends React.Component {
     constructor(props) {
         super(props); 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -178,10 +166,10 @@ class Indecision extends React.Component {
         this.handleDeleteAction = this.handleDeleteAction(this)
        
         this.state = {
-            options : ['andu'],
-            description: ['meko'],
-            priority: ['yaya'],
-            pickedAction:['one','two', 'three']
+            options : [],
+            description: [],
+            priority: [],
+            pickedAction:[]
             
         }
     
@@ -197,9 +185,7 @@ class Indecision extends React.Component {
  }
         
     handleSubmit(option,desc, prio) { 
-          console.log("this are my option", option)
-          console.log("this are my desc",desc) 
-          console.log("this are my prio", prio)  
+          
         this.setState((prevState) => {
             return {
                 options: prevState.options.concat(option),
@@ -216,9 +202,9 @@ const option = this.state.options[randomNum]
 const desc = this.state.description[randomNum]
 const prio = this.state.priority[randomNum]
  
-this.setState((prevState) => {
+this.setState(() => {
     return {
-        pickedAction: prevState.pickedAction.concat(option, desc, prio)
+        pickedAction: this.state.pickedAction.concat(option,desc,prio)
     }
 })
 
@@ -226,36 +212,50 @@ this.setState((prevState) => {
 
 }
 handleDeleteAction(){
+  
     this.setState(() => {
         return {
-            pickedAction: []
+            pickedAction: false
         }
     }
     )
+}
+handleDeleteEachItem(option, desc, prio) {
+    console.log('it is working', option, desc, prio)
+    this.setState((prevState) => {
+        return {
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option 
+            
+            })
+            description: prevState.description.filter((desc) => {
+                return optionToRemove !== desc
+            }),
+            priority: prevState.priority.filter((prio) => {
+                return optionToRemove !== prio
+            })
+        }
+    })
 }
 
     render() {
         return (
             <div> 
                 <Action handlePick={this.handlePick}
-                        hasOption={this.state.options.length > 0}        
+                        hasOption={this.state.options.length > 0}  
+                        handleDeleteAction={this.handleDeleteAction}
+                        pickedAction={this.state.pickedAction}     
                 />
 
                  <Options options={this.state.options}
                         description={this.state.description}
                         priority = {this.state.priority}
                         handleDeleteAll={this.handleDeleteAll}
+                        handleDeleteEachItem={this.handleDeleteEachItem}
                       
                />
                <AddOptions handleSubmit={this.handleSubmit}/>
-                
-              <ResultAction pickedAction={this.state.pickedAction}
-                           handleDeleteAction={this.handleDeleteAction}
-              />
-             
-                
-              
-               
+                      
               
             </div>
         )
@@ -263,27 +263,34 @@ handleDeleteAction(){
 
 }
 class Action extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteAction = this.handleDeleteAction.bind(this)
+    }
+    handleDeleteAction(){
+        this.props.handleDeleteAction(this.props.pickedAction)
+    }
     render() {
         return(
             <div>
                 <button onClick={this.props.handlePick}
                         disabled={!this.props.hasOption}
                 >What shall i do now ?</button>
-            </div>
-        )
-    }
-}
-class ResultAction extends React.Component {
-    render() {
-        return(
-            <div>
+                <div>
             <h2>Your Current Option, description and priority is </h2>
             {this.props.pickedAction.map((action) => <p key ={action}> {action}</p>)}
-            <button onClick={this.handleDeleteAction}>Done</button>
+            <button onClick={ (e) => {
+                this.props.handleDeleteAction(this.props.pickedAction)
+            }
+                }>Done</button>
+           
+            </div>
+
             </div>
         )
     }
 }
+
 class Options extends React.Component {
 
     render() {
@@ -292,11 +299,24 @@ class Options extends React.Component {
         <div className="options">
             <button onClick={this.props.handleDeleteAll}>Remove All</button>
              <h1>Options</h1>
-            <h3>{this.props.options.map((option, idx) =>  <OptionAll key={idx} optionText={option}/>)}</h3>
+            <h3>{this.props.options.map((option, idx) =>  <OptionAll key={idx} 
+                                                        optionText={option}
+                                                         handleDeleteEachItem={this.props.handleDeleteEachItem}
+                                                        />)}</h3>
+                                                       
             <h1>Description</h1>
-            <h3>{this.props.description.map((desc, idx) => <OptionAll key={idx} descText={desc}/>)}</h3>
+            <h3>{this.props.description.map((desc, idx) => <OptionAll key={idx} 
+                                                            descText={desc}
+                                                             handleDeleteEachItem={this.props.handleDeleteEachItem}
+                                                            />)}
+                                                           
+                                                            </h3>
             <h1>Priority</h1>
-            <h3>{this.props.priority.map((prio, idx) => <OptionAll key={idx} prioText={prio}/>)}</h3>
+            <h3>{this.props.priority.map((prio, idx) => <OptionAll key={idx} 
+                                                        prioText={prio}
+                                                        handleDeleteEachItem={this.props.handleDeleteEachItem}
+                                                        />)}
+                                                        </h3>
            
            
         </div>
@@ -314,6 +334,13 @@ class OptionAll extends React.Component {
           {this.props.optionText}
             {this.props.descText}
           {this.props.prioText}
+          <button onClick={(e) => {
+            this.props.handleDeleteEachItem(this.props.optionText)
+            this.props.handleDeleteEachItem(this.props.descText)
+            this.props.handleDeleteEachItem(this.props.prioText)
+          }}
+          
+          >Remove</button>
         </div>
         )}
 }
@@ -328,7 +355,7 @@ class AddOptions extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        console.log('handle submit hit')
+       
     const option= e.target.elements.option.value.trim();
     const desc= e.target.elements.desc.value.trim();
     const prio= e.target.elements.prio.value.trim();
@@ -357,7 +384,7 @@ class AddOptions extends React.Component {
 }
 
 
-ReactDOM.render(<Indecision />, document.getElementById('app'))
+ReactDOM.render(<Indecision />, document.getElementById('app')) */
 
 
 
