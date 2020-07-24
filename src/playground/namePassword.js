@@ -22,7 +22,9 @@ class HomeComponent extends React.Component {
             case "name":{ 
                 if(itemValue.length < 5) {
                   item.target.style.color= 'red';
-                  this.setState({name: itemValue})  
+                 
+                 this.setState({name: itemValue}) 
+                  
                 }
                 else {
                     item.target.style.color= 'black',
@@ -48,12 +50,7 @@ class HomeComponent extends React.Component {
         obj.description= this.state.description
         console.warn("submit", obj)
     }
-    me() {
-        let me = {}
-            me.description = this.state.description
-          console.warn('description', me)  
-        }
-    c
+
     render() { 
         return ( 
             <div >

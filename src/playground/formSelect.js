@@ -7,60 +7,42 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            username:'',
-            comments:'',
-            topics: ''
+            car:'',
+            bike: ''
+          
 
          }
     }
-    
-    usernameHandler = (event) => {
-        this.setState({
-            username : event.target.value
+    handleChange = (event) => {
+        let eventid = event.target.id;
+        console.log(eventid)
+        this.setState ({
+            [eventid] : event.target.value
         })
     }
-    commentHandler = (event) => {
-        this.setState({
-            comments: event.target.value
-        })
-    }
-    topicHandler = (event) => {
-        this.setState({
-            topics: event.target.value
-        })
-    }
-    formHandler = () => {
-        alert(`${this.state.username} ${this.state.comments} ${this.state.topics}`)
-      this.setState((prevState)=> {
+
+   
+     formHandler = () => {
+         alert(`${this.state.username} ${this.state.comments} ${this.state.topics}`)
+     this.setState((prevState)=> {
           return {
               username: prevState.username,
               comments: prevState.comments,
               topics: prevState.topics
-          }
-      })
-    }
+      }
+   })
+     }
     render() { 
         return ( 
             <div>
             
             <form onSubmit={this.formHandler}>
-                <div>
-                    <label>User Name</label>
-                    <input value={this.state.username} onChange={this.usernameHandler} />
-                </div>
-                <div>
-                    <label>Comments</label>
-                    <textarea value={this.state.comments} onChange={this.commentHandler}></textarea>
-
-                </div>
-                <div>
-                    <select value={this.state.topics} onChange={this.topicHandler}> 
-                        <option>React</option>
-                        <option>veu</option>
-                        <option>Angular</option>
-                    </select>
-                </div>
+               
                 <button>Submit</button>
+                <label> Car</label>
+            <input value = {this.state.car} id = {'car'} onChange = {this.handleChange} />
+                <label>Bick</label>
+            <input value = {this.state.bike} id = {'bike'} onChange = {this.handleChange} />
             
             
             
